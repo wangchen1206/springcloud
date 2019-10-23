@@ -37,7 +37,7 @@
 //
 //        @GetMapping("/test")
 //        public String test() {
-//            String result = restTemplate.getForObject("http://alibaba-nacos-discovery-server/hello?name="+"restTemplate", String.class);
+//            String result = restTemplate.getForObject("http://hello-service/hello?name="+"restTemplate", String.class);
 //            return "Return : " + result;
 //        }
 //    }

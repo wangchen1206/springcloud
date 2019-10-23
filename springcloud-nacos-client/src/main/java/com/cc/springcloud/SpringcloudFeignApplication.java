@@ -46,7 +46,7 @@ public class SpringcloudFeignApplication {
      * 创建Feign客户端接口定义
      * 使用@FeignClient注解来指定这个接口所要调用的服务名称
      */
-    @FeignClient("alibaba-nacos-discovery-server")
+    @FeignClient("hello-service")
     interface Client{
 
         /**

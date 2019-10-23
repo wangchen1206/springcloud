@@ -43,7 +43,7 @@
 //        public Mono<String> test() {
 //            Mono<String> result = webClientBuilder.build()
 //                    .get()
-//                    .uri("http://alibaba-nacos-discovery-server/hello?name="+"webClient")
+//                    .uri("http://hello-service/hello?name="+"webClient")
 //                    .retrieve()
 //                    .bodyToMono(String.class);
 //            return result;
