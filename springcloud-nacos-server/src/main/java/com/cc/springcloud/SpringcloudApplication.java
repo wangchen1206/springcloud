@@ -1,5 +1,6 @@
 package com.cc.springcloud;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +23,7 @@ public class SpringcloudApplication {
     static class TestController {
 
         @GetMapping("/hello")
+        @SentinelResource("hello")
         public String hello(@RequestParam String name) {
             log.info("invoke name = " + name);
             return "hello" + name;
