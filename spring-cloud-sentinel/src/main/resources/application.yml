@@ -1,0 +1,13 @@
+server:
+  port: 21113
+
+spring:
+  application:
+    name: spring-cloud-sentinel
+
+  #sentinel
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
