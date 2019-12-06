@@ -6,6 +6,7 @@ package com.cc.spring.design.command;
  */
 public class Client {
     public static void main(String[] args) {
+
         Receiver receiver = new Receiver();
         Command command = new MyCommand(receiver);
         Invoker invoker = new Invoker(command);
