@@ -1,0 +1,33 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: test-topic
+          content-type: application/json
+        input:
+          destination: test-topic
+          group: test-group
+        output1:
+          destination: test-topic1
+          content-type: application/json
+        input1:
+          consumer:
+            #消费重试次数
+            maxAttempts: 3
+            #定义消费者线程数
+            concurrency: 3
+            #以广播的方式接收消息
+            #broadcasting: true
+            tags: user||user1
+          destination: test-topic1
+          group: test-group1
+        #output2:
+          #destination: test2-topic
+          #content-type: application/json
+        input2:
+          destination: test2-topic
+          group: test2-group
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
