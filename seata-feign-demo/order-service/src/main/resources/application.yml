@@ -1,0 +1,45 @@
+server:
+  port: 8081
+
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.cc.seata.order.entity
+  global-config:
+    # 数据库相关配置
+    db-config:
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      update-strategy: NOT_EMPTY
+
+spring:
+  application:
+    name: order-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 111111
+
+  #spring cloud
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+#Seata配置项，对应SeataProperties类
+seata:
+  application-id: ${spring.application.name}
+  tx-service-group: ${spring.application.name}-group #Seata事务组编号，用于TC集群名
+  #Seata服务配置项，对应ServiceProperties类
+  service:
+  #虚拟组和分组的映射
+    vgroup-mapping:
+      order-service-group: default
+  #Seata注册中心配置项，对应RegistryProperties
+  registry:
+    type: nacos
+    nacos:
+      cluster: default #使用的Seata分组
+      namespace: #Nacos命名空间
+      server-addr: localhost #Nacos服务地址
+
