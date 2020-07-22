@@ -1,12 +1,11 @@
-package com.cc.seata.order.entity;
+package com.cc.seata.account.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -14,24 +13,18 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author wangchen
- * @since 2020-07-12
+ * @since 2020-07-22
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Orders implements Serializable {
+public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    private Long userId;
-
-    private Long productId;
-
-    private Integer payAmount;
-
-    private LocalDateTime addTime;
+    private Double balance;
 
     private LocalDateTime lastUpdateTime;
 

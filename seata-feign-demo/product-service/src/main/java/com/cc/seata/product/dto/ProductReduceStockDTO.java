@@ -1,4 +1,4 @@
-package com.cc.seata.order.feign.dto;
+package com.cc.seata.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

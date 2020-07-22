@@ -1,22 +1,22 @@
 server:
-  port: 8081
+  port: 8083
 
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.cc.seata.order.entity
+  type-aliases-package: com.cc.seata.account.entity
   global-config:
-    # 数据库相关配置
+   # 数据库相关配置
     db-config:
       #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
       update-strategy: NOT_EMPTY
 
 spring:
   application:
-    name: order-service
+    name: account-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/seata_amount?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
     username: root
     password: 111111
 
@@ -34,7 +34,7 @@ seata:
   service:
   #虚拟组和分组的映射
     vgroup-mapping:
-      order-service-group: default
+      account-service-group: default
   #Seata注册中心配置项，对应RegistryProperties,去注册中心拉取Seata服务地址
   registry:
     type: nacos

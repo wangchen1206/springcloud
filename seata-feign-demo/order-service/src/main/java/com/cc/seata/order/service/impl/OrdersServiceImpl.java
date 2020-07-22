@@ -4,18 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cc.seata.order.entity.Orders;
 import com.cc.seata.order.feign.AccountServiceFeignClient;
 import com.cc.seata.order.feign.ProductServiceFeignClient;
-import com.cc.seata.order.feign.dto.AccountReduceBalanceDTO;
-import com.cc.seata.order.feign.dto.ProductReduceStockDTO;
+import com.cc.seata.order.dto.AccountReduceBalanceDTO;
+import com.cc.seata.order.dto.ProductReduceStockDTO;
 import com.cc.seata.order.mapper.OrdersMapper;
 import com.cc.seata.order.service.IOrdersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.seata.core.context.RootContext;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -48,7 +46,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
     }
 
     @Override
-    @GlobalTransactional
+    @GlobalTransactional //声明全局事务
     public Integer createOrder(Long userId, Long productId, Integer price) {
         Integer amount = 1; //购买数量，暂时设置为1
         log.info("[createOrder] 当前XID: {}", RootContext.getXID());

@@ -2,7 +2,6 @@ package com.cc.seata.order.service;
 
 import com.cc.seata.order.entity.Orders;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.aspectj.weaver.ast.Or;
 
 import java.util.List;
 
