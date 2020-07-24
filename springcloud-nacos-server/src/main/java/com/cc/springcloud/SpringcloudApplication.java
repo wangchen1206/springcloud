@@ -17,16 +17,4 @@ public class SpringcloudApplication {
         SpringApplication.run(SpringcloudApplication.class, args);
     }
 
-
-    @Slf4j
-    @RestController
-    static class TestController {
-
-        @GetMapping("/hello")
-        @SentinelResource("hello")
-        public String hello(@RequestParam String name) {
-            log.info("invoke name = " + name);
-            return "hello" + name;
-        }
-    }
 }

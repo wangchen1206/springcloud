@@ -1,0 +1,11 @@
+server:
+  port: 21116
+
+spring:
+  application:
+    name: hello-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:18848,127.0.0.1:28848,127.0.0.1:38848
+
