@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: spring-cloud-gateway
+
+  #nacos config
+  cloud:
+    nacos:
+      #Nacos Config配置项，对应NacosConfigProperties 配置属性类
+      config:
+        server-addr: 127.0.0.1:18848,127.0.0.1:28848,127.0.0.1:38848 #Nacos服务器地址
+        namespace: #使用的Nacos的命名空间，默认为null
+        group: DEFAULT_GROUP #使用的Nacos的配置分组，默认为DEFAULT_GROUP
+        name: #使用的Nacos 配置集的dataId，默认为spring.application.name
+        file-extension: yaml #使用的Nacos配置集的dataId的文件扩展名，同时也是Nacos配置集的配置格式，默认为properties
+
+
+
