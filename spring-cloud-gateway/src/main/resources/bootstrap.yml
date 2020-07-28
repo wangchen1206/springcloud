@@ -5,6 +5,8 @@ spring:
   #nacos config
   cloud:
     nacos:
+      discovery:
+        server-addr: 127.0.0.1:18848
       #Nacos Config配置项，对应NacosConfigProperties 配置属性类
       config:
         server-addr: 127.0.0.1:18848,127.0.0.1:28848,127.0.0.1:38848 #Nacos服务器地址

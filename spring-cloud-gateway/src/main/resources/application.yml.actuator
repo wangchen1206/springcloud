@@ -1,0 +1,21 @@
+server:
+  port: 21114
+
+#spring boot actutor监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'  #需要开放的端点。默认只打开health 和 info 两个端点。通过配置 * ,可以开发所有端点
+  endpoint:
+    #Health 端点配置项，对应HealthProperties 配置类
+    health:
+      enabled: true
+      show-details: always #何时显示完整的健康信息。默认never都不显示。可选 when_authorized 当经过授权的用户；可选 always 总是显示。
+
+
+
+
+
+
+
