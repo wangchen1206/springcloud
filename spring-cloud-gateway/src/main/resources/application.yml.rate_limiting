@@ -1,0 +1,36 @@
+server:
+  port: 21114
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  #gateway
+  cloud:
+    #Nacos作为注册中心配置项
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:18848
+    gateway:
+      #路由配置项，对应RouteDefinition数组
+      routes:
+        - id: yudaoyuanma #路由的编号
+          uri: http://www.iocoder.cn  #路由到的目标地址
+          predicates: #断言，作为路由的匹配条件，对应RouteDefinition数组
+            - Path=/blog
+          filters:
+            - StripPrefix=1
+            #令牌桶算法的原理是系统会以一个恒定的速度往桶里放入令牌，而如果请求需要被处理，则需要先从桶里获取一个令牌，当桶里没有令牌可取时，则拒绝服务
+            - name: RequestRateLimiter #请求限流过滤器，基于令牌桶算法
+              args:
+                redis-rate-limiter.replenishRate: 1 #令牌桶的每秒放的数量
+                redis-rate-limiter.burstCapacity: 2 #令牌桶的最大令牌数量
+                key-resolver: "#{@ipKeyResolver}" #获取限流Key的Bean的名字
+        - id: oschina # 路由的编号
+          uri: https://www.oschina.net # 路由的目标地址
+          predicates: # 断言，作为路由的匹配条件，对应 RouteDefinition 数组
+            - Path=/oschina
+          filters: # 过滤器，对请求进行拦截，实现自定义的功能，对应 FilterDefinition 数组
+            - StripPrefix=1
+
+

@@ -1,0 +1,25 @@
+server:
+  port: 21114
+
+#实现灰度发布  基于权重实现。
+spring:
+    cloud:
+        gateway:
+            routes:
+            -   id: hello-service-1.0.0
+                predicates:
+                - Path=/**
+                - Weight=hello-service,90
+                filters:
+                - StripPrefix=1
+                uri: http://www.iocoder.cn/
+            -   id: hello-service-1.1.0
+                predicates:
+                - Path=/**
+                - Weight=hello-service,10
+                filters:
+                - StripPrefix=1
+                #- RewritePath=/hello-service/(?<remaining>.*),/${remaining}
+                uri: https://www.oschina.net
+
+

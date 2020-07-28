@@ -24,7 +24,8 @@ import java.util.Map;
  * @author wangchen
  * @createDate 2020/07/27
  */
-@Component
+//使用时，记得打开下边注释
+//@Component
 public class AuthGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthGatewayFilterFactory.Config> {
 
     //保证父类能够创建Config对象
@@ -33,6 +34,7 @@ public class AuthGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthG
     }
 
 
+    @Override
     public GatewayFilter apply(final Config config) {
         //<1> token 和 userId的映射
         final Map<String,Integer> tokenMap = new HashMap<String, Integer>();
@@ -40,6 +42,7 @@ public class AuthGatewayFilterFactory extends AbstractGatewayFilterFactory<AuthG
 
         //创建GatewayFilter 对象
         return new GatewayFilter() {
+            @Override
             public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
                 //<2> 获得token
                 ServerHttpRequest request = exchange.getRequest();

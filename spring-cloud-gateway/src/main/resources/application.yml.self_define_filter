@@ -1,0 +1,44 @@
+server:
+  port: 21114
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  #gateway
+  cloud:
+    #Nacos作为注册中心配置项
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:18848
+    gateway:
+      #配置自定义Filter
+      default-filters:
+        - name: Auth  #GateWay默认使用XXXGatewayFilterFactory的前缀XXX为名字。
+          args:
+            #过滤器的配置参数，对应Map类，这里我们设置token-header-name为access-token,表示从请求Header access-token获得认证token。
+            token-header-name: access-token
+    ######使用Nacos Config 配置中心，自动创建动态路由的功能
+#    #Spring Cloud Gateway 配置项，对应GatewayProperties
+#    gateway:
+#    #路由配置项，对应RoutDefinition
+#      routes:
+#        - id: youdaoyuanma #路由的编号
+#          uri: http://www.iocoder.cn #路由到的目标地址
+#          predicates: #断言，作为路由的匹配条件，对应RouteDefinition.predicates list
+#            - Path=/blog
+#          filters:  #过滤器，对应RouteDefinition.filters list
+#            - StripPrefix=1
+#        - id: hello-service #路由的编号
+#          uri: lb://hello-service #路由到的目标地址
+#          predicates: #断言，作为路由的匹配条件，对应RouteDefinition.predicates list
+#            - Path=/hello-service/**
+#          filters:  #过滤器，对请求进行拦截，实现自定义功能，对应RouteDefinition.filters list
+#            - RewritePath=/hello-service/(?<remaining>.*),/${remaining} # 将/hello-service前缀剔除
+#      #与Spring Cloud 注册中心集成，对应 DiscoveryLocatorProperties
+#      discovery:
+#        locator:
+#          enabled: true #是否开启，默认为false关闭
+#          url-expression: "'lb://'+serviceId" #路由的目标地址的表达式，默认为："'lb://'+serviceId"  lb:// 前缀，表示将请求负载均衡转发到对应的服务的实例。
+
+
