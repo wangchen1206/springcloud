@@ -1,0 +1,37 @@
+server:
+  port: 21000
+
+spring:
+  application:
+    name: demo-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:18848
+
+#配置客户端级别的负载均衡策略，配置文件方式，还有JavaConfig方式
+#demo-provider:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule  #负责均衡规则全类名
+
+ribbon:
+  eager-load:
+    enabled: true #开启饥饿加载
+    clients: demo-provider,demo-provicer2 #开启饥饿加载的Ribbon客户端的服务名，多个用 ','隔开。
+  #使用的http客户端
+#  okhttp:
+#    enabled: true
+  restclient:
+    enabled: true
+#  http:
+#    client:
+#      enabled: true
+
+demo-provider:
+  ribbon:
+    ConnectTimeout: 1000 # 请求的连接超时时间，单位：毫秒。默认为 1000
+    ReadTimeout: 1 # 请求的读取超时时间，单位：毫秒。默认为 1000
+    OkToRetryOnAllOperations: true # 是否对所有操作都进行重试，默认为 false。
+    MaxAutoRetries: 0 # 对当前服务的重试次数，默认为 0 次。
+    MaxAutoRetriesNextServer: 1 # 重新选择服务实例的次数，默认为 1 次。注意，不包含第 1 次哈。
+

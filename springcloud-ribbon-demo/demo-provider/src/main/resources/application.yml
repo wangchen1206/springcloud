@@ -1,0 +1,10 @@
+server:
+  port: ${random.int[10000,19999]}
+
+spring:
+  application:
+    name: demo-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:18848
