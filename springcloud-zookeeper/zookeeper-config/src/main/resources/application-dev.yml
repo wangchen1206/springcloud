@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: demo-application
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+      #Zookeeper 作为注册中心的配置项，对应ZookeeperProperties配置类
+      config:
+        root: /config #Zookeeper数据存储根节点
+        default-context: application #默认读取Zookeeper配置的目录，默认为application
+        profile-separator: ',' #多环境目录分隔符，默认为 ,
+        watcher:
+          enabled: true #是否开启watch功能，监控Zookeeper数据变化。默认为true，实现实时监听配置的更新
+
+
+

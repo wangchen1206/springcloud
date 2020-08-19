@@ -1,0 +1,15 @@
+server:
+  port: 21000
+
+spring:
+  application:
+    name: demo-consumer
+  cloud:
+    zookeeper:
+      connect-string: 127.0.0.1:2181,127.0.0.1:2182,127.0.0.1:2183
+      #Zookeeper 作为注册中心的配置项，对应ZookeeperProperties配置类
+      discovery:
+        root: /services  #Zookeeper存储的根节点，默认为 /services
+
+
+
