@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: demo-application
+
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:18848,127.0.0.1:28848,127.0.0.1:38848
+      #Nacos Config 配置项，对应NacosConfigProperties
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr}
+        namespace: a832ffce-a4cd-4414-85f8-2f47e34fa6b9 #使用的Nacos命名空间，默认为null
+        group: DEFAULT_GROUP #使用的Nacos的默认分组，默认为DEFAULT_GROUP
+        name: #使用的Nacos配置集的dataId,默认为 ${spring.application.name}
+        file-extension: yaml #使用的Nacos配置集的dataId的文件拓展名，默认是properties
+
