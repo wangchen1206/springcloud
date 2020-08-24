@@ -43,7 +43,7 @@ public class DemoProviderApplication {
         }
 
         @GetMapping("/user/get")
-        public String getUser(String name) throws InterruptedException {
+        public String getUser(String name) {
 
             // 记录被调用的日志
             logger.info("[getUser][被调用啦 name({})]", name);
