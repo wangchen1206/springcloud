@@ -1,0 +1,40 @@
+server:
+  port: 21102
+
+#监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 需要开放的端点。默认值只打开 health 和 info 两个端点。通过设置 * ，可以开放所有端点。
+  endpoint:
+    health:
+      enabled: true
+      show-details: always # 何时显示完整的健康信息。默认为 NEVER 都不展示。可选 WHEN_AUTHORIZED 当经过授权的用户；可选 ALWAYS 总是展示。
+
+spring:
+  application:
+    name: demo-provider
+
+  cloud:
+    #Sentinel配置项，对应SentinelProperties 配置属性类
+    sentinel:
+      enabled: true  #是否开启，默认为true
+      eager: true  #是否饥饿加载，默认为false。
+      transport:
+        dashboard: 127.0.0.1:7070 #Sentinel控制台地址
+      filter:
+        url-patterns: /** #拦截请求的地址，默认为 /* (只是一级目录)
+
+      #Sentinel规则数据源是一个Map类型。key为数据源的名称，可自定义，value为数据源的配置
+      datasource:
+        ds1:
+          #对应DataSourcePropertiesConfiguration 类
+          file:
+            file: D:\\Git\\wangchen1206\\springcloud\\spring-cloud-sentinel\\demo-provider\\src\\main\\resources\\flow-rule.json
+            recommendRefreshMs: 3000 # 定时读取实现刷新，默认为 3000 毫秒。
+            dataType: json
+            ruleType: flow
+
+
+

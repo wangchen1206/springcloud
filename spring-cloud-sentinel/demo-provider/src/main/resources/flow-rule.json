@@ -1,0 +1,11 @@
+[
+  {
+    "resource": "/demo/test",
+    "limitApp": "default",
+    "grade": 1,
+    "count": 4,
+    "strategy": 0,
+    "controlBehavior": 0,
+    "clusterMode": false
+  }
+]
