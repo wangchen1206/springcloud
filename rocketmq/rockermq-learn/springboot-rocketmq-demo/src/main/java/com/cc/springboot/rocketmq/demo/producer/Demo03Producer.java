@@ -9,6 +9,12 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 
+/**
+ * 定时发送，只支持 同步发送和异步发送
+ *
+ * @author wangchen
+ * @createDate 2020/8/28
+ **/
 @Component
 public class Demo03Producer {
 

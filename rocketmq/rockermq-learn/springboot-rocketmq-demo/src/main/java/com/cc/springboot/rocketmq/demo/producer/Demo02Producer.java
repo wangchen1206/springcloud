@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Description
+ * 批量发送
  *
  * @author wangchen
  * @createDate 2020/08/27
