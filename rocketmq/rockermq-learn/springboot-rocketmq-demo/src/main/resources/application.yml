@@ -1,6 +1,6 @@
 #Rocketmq配置 ，对应RocketMQProperties 类
 rocketmq:
-  name-server: localhost:9876 # RocketMQ Namesrv,如果多个，使用逗号分隔。
+  name-server: 192.168.200.92:9876 # RocketMQ Namesrv,如果多个，使用逗号分隔。
   # Producer 配置项
   producer:
     group: demo-producer-group #生产者分组

@@ -15,3 +15,5 @@ mybatis-plus:
   type-aliases-package: com.cc.spring.entity
   configuration:
     map-underscore-to-camel-case: true
+
+a: ${random.uuid}
