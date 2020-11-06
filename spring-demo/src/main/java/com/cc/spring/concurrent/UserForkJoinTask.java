@@ -30,18 +30,20 @@ public class UserForkJoinTask extends RecursiveTask<List<User>> {
     @Override
     protected List<User> compute() {
         List<User> users = new ArrayList<>();
-        if ((end.getTime()-start.getTime())<1000*10000){
+        if ((end.getTime() - start.getTime()) < 1000 * 20000) {
+//            System.out.println(Thread.currentThread().getName());
+            System.out.println("start: "+start+"------"+"end: "+end);
             //执行sql查询
             List<User> list = userService.list(new QueryWrapper<User>().lambda()
                     .ge(User::getCreateDate, start)
                     .le(User::getCreateDate, end));
             users.addAll(list);
             return users;
-        }else {
-            Date inter = new Date((start.getTime()+end.getTime())/2);
-            UserForkJoinTask leftTask = new UserForkJoinTask(start,inter,userService);
+        } else {
+            Date inter = new Date((start.getTime() + end.getTime()) / 2);
+            UserForkJoinTask leftTask = new UserForkJoinTask(start, inter, userService);
             leftTask.fork();
-            UserForkJoinTask rightTask = new UserForkJoinTask(inter,end,userService);
+            UserForkJoinTask rightTask = new UserForkJoinTask(inter, end, userService);
             rightTask.fork();
 
             users.addAll(leftTask.join());
