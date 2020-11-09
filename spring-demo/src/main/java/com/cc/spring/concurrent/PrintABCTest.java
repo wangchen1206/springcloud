@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @createDate 2020/11/06
  */
 @Data
-public class ABCTest {
+public class PrintABCTest {
 
     private static String flag = "a";
     private static Lock lock = new ReentrantLock();
