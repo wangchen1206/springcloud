@@ -1,4 +1,4 @@
-package com.cc.spring.concurrent;
+package com.cc.spring.concurrent.condition;
 
 import java.util.LinkedList;
 import java.util.Queue;
