@@ -8,6 +8,27 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 111111
+  mail:
+    host: smtp.163.com
+    password:
+    port: 465
+    properties:
+      mail:
+        imap:
+          ssl:
+            socketFactory:
+              fallback: false
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            socketFactory:
+              class: javax.net.ssl.SSLSocketFactory
+          starttls:
+            enable: false
+            required: false
+    test-connection: false
+    username: ck_chenwang@163.com
 
 
 mybatis-plus:
