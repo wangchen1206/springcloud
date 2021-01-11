@@ -8,12 +8,12 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * Description
+ * FileChannel不是 非阻塞IO
  *
  * @author wangchen
  * @createDate 2021/01/11
  */
-public class TestNio {
+public class TestFileChannel {
 
     //往本地文件写数据
     @Test
