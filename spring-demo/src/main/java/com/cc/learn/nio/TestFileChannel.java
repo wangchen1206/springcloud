@@ -5,7 +5,12 @@ import org.junit.Test;
 
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
 
 /**
  * FileChannel不是 非阻塞IO
@@ -42,7 +47,17 @@ public class TestFileChannel {
         FileChannel channel = fileInputStream.getChannel();
         ByteBuffer byteBuffer = ByteBuffer.allocate(((int) new File("test.txt").length()));
         channel.read(byteBuffer);
-        System.out.println(new String(byteBuffer.array()));
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+        byteBuffer.flip();
+        System.out.println("-----------------------------------------");
+        System.out.println(byteBuffer.position());
+        System.out.println(byteBuffer.limit());
+        System.out.println(byteBuffer.capacity());
+        byte[] dst = new byte[10];
+        byteBuffer.get(dst,0,10);
+        System.out.println(new String(dst));
         fileInputStream.close();
     }
 
@@ -50,11 +65,60 @@ public class TestFileChannel {
     @Test
     public void test3() throws IOException {
         FileInputStream fileInputStream = new FileInputStream("test.txt");
-        FileOutputStream fileOutputStream = new FileOutputStream("test1.txt");
+        FileOutputStream fileOutputStream = new FileOutputStream("test2.txt");
         FileChannel srcChannel = fileInputStream.getChannel();
         FileChannel descChannel = fileOutputStream.getChannel();
         descChannel.transferFrom(srcChannel,0,srcChannel.size());
+        srcChannel.transferTo(0,srcChannel.size(),descChannel);
         srcChannel.close();
         descChannel.close();
+    }
+
+    //第二种创建FileChannel的方式 (直接缓冲区)
+    @Test
+    public void test4() throws IOException {
+        FileChannel open = FileChannel.open(Paths.get("test.txt"), StandardOpenOption.READ);
+        FileChannel open1 = FileChannel.open(Paths.get("test4.txt"), StandardOpenOption.WRITE,
+                StandardOpenOption.READ, StandardOpenOption.CREATE);
+        open.transferTo(0,open.size(),open1);
+        open.close();
+        open1.close();
+    }
+
+    //FileChannel 内存映射文件
+    @Test
+    public void test5() throws IOException{
+        FileChannel open = FileChannel.open(Paths.get("test.txt"), StandardOpenOption.READ);
+        FileChannel open1 = FileChannel.open(Paths.get("test5.txt"), StandardOpenOption.READ,
+                StandardOpenOption.WRITE, StandardOpenOption.CREATE);
+        MappedByteBuffer map = open.map(FileChannel.MapMode.READ_ONLY, 0, open.size());
+        MappedByteBuffer map1 = open1.map(FileChannel.MapMode.READ_WRITE, 0, open.size());
+        byte[] dst = new byte[map.limit()];
+        map.get(dst);
+        map1.put(dst);
+
+        open.close();
+        open1.close();
+    }
+
+    //分散读取和聚集写入
+    @Test
+    public void test6() throws IOException{
+        RandomAccessFile randomAccessFile = new RandomAccessFile("test.txt", "rw");
+        RandomAccessFile randomAccessFile1 = new RandomAccessFile("test6.txt", "rw");
+        ByteBuffer allocate = ByteBuffer.allocate(10);
+        ByteBuffer allocate1 = ByteBuffer.allocate(10);
+        FileChannel channel = randomAccessFile.getChannel();
+        ByteBuffer[] bufs = {allocate,allocate1};
+        //分散读取
+        channel.read(bufs);
+        //讲position置为0，limit置为position，切换成读模式
+        Arrays.stream(bufs).forEach(e->e.flip());
+
+        FileChannel channel1 = randomAccessFile1.getChannel();
+        //聚集写入
+        channel1.write(bufs);
+        channel.close();
+        channel1.close();
     }
 }
