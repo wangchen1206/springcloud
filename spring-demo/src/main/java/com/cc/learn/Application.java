@@ -7,7 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.cc.spring.mapper")
+@MapperScan("com.cc.learn.mapper")
 public class Application {
 
     private static Logger logger = LoggerFactory.getLogger(Application.class);
