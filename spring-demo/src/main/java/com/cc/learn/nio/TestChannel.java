@@ -59,6 +59,21 @@ import org.junit.Test;
  * 
  */
 public class TestChannel {
+
+	@Test
+	public void test7(){
+		ByteBuffer byteBuffer = ByteBuffer.allocate(10);
+		for (int i = 0;i<5;i++){
+			byteBuffer.put((byte) i);
+		}
+		//转换为readOnlyByteBuffer,只读模式
+		ByteBuffer readOnlyBuffer = byteBuffer.asReadOnlyBuffer();
+		readOnlyBuffer.flip();
+		for (int i = 0; i < readOnlyBuffer.limit(); i++) {
+			System.out.println(readOnlyBuffer.get());
+		}
+		readOnlyBuffer.put((byte) 1);
+	}
 	
 	//字符集
 	@Test

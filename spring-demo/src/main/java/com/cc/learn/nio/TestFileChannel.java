@@ -121,4 +121,15 @@ public class TestFileChannel {
         channel.close();
         channel1.close();
     }
+
+    //直接在内存映射中修改文件
+    @Test
+    public void test7() throws Exception{
+        RandomAccessFile randomAccessFile = new RandomAccessFile("test.txt", "rw");
+        FileChannel channel = randomAccessFile.getChannel();
+        MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, randomAccessFile.length());
+        map.put(0,(byte) 'Q');
+        map.put(5,(byte) 'L');
+        System.out.println("修改完毕！");
+    }
 }

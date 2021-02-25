@@ -55,7 +55,7 @@ public class ChatServer {
                             //设置非阻塞模式
                             socketChannel.configureBlocking(false);
                             //注册到选择器，并监听 read
-                            socketChannel.register(selector, SelectionKey.OP_READ);
+                            socketChannel.register(selector, SelectionKey.OP_READ,ByteBuffer.allocate(1024));
                             System.out.println(socketChannel.getRemoteAddress().toString().substring(1) + "上线了...");
                             //将Selectkey设置为accept,接着准备接收其他客户端的请求
                             key.interestOps(SelectionKey.OP_ACCEPT);
@@ -82,7 +82,7 @@ public class ChatServer {
         try {
             //得到关联的channel
             channel = (SocketChannel) key.channel();
-            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+            ByteBuffer byteBuffer = (ByteBuffer) key.attachment();
             //从通道中读取数据并放入缓冲区
             int count = channel.read(byteBuffer);
             //如果读取到了数据
