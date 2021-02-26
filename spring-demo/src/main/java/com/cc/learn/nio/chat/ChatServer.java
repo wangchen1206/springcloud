@@ -13,6 +13,13 @@ import java.util.Iterator;
  * @author wangchen
  * @createDate 2021/01/14
  */
+
+/**
+ * 疑惑：ServerSocketChannel 和 SocketChannel 利用Selector ,进行自己通道的对某一个事件的监听。
+ * SelectionKey是通道和选择器的绑定关系，通道注册到选择器上，生成一个SelectionKey,并将通道绑定再SelectionKey上
+ **/
+
+
 public class ChatServer {
     private Selector selector;
     private ServerSocketChannel listenerChannel;
@@ -45,6 +52,7 @@ public class ChatServer {
             try {
                 count = selector.select();
                 if (count > 0) {
+                    //获取 已经有监听事件发生的 selectionKey
                     Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
                     while (iterator.hasNext()) {
                         SelectionKey key = iterator.next();
@@ -55,7 +63,7 @@ public class ChatServer {
                             //设置非阻塞模式
                             socketChannel.configureBlocking(false);
                             //注册到选择器，并监听 read
-                            socketChannel.register(selector, SelectionKey.OP_READ,ByteBuffer.allocate(1024));
+                            socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
                             System.out.println(socketChannel.getRemoteAddress().toString().substring(1) + "上线了...");
                             //将Selectkey设置为accept,接着准备接收其他客户端的请求
                             key.interestOps(SelectionKey.OP_ACCEPT);
