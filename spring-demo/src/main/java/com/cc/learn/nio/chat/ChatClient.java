@@ -61,7 +61,7 @@ public class ChatClient {
         int count = selector.select();
         if (count > 0 ){
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
-            if (iterator.hasNext()){
+            while (iterator.hasNext()){
                 SelectionKey key = iterator.next();
                 if (key.isReadable()){
                     SocketChannel channel = (SocketChannel) key.channel();
