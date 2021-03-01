@@ -80,6 +80,9 @@ public class TestFileChannel {
         FileChannel open = FileChannel.open(Paths.get("test.txt"), StandardOpenOption.READ);
         FileChannel open1 = FileChannel.open(Paths.get("test4.txt"), StandardOpenOption.WRITE,
                 StandardOpenOption.READ, StandardOpenOption.CREATE);
+        //transferTo底层使用零拷贝
+        //在Linux系统，可以直接将一个文件发送到一个channel
+        //在Windows系统，一次可以发送8M的文件，大于8M的文件需要分次发送。
         open.transferTo(0,open.size(),open1);
         open.close();
         open1.close();
