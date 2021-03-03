@@ -70,6 +70,7 @@ public class GroupChatServer {
 
     //处理读
     private void readMsg(SelectionKey selectionKey) {
+        System.out.println("readMsg线程： " + Thread.currentThread().getName());
         SocketChannel channel = null;
         try {
             //获取通道
