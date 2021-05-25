@@ -1,6 +1,7 @@
 package com.cc.learn.design.singleton;
 
 /**
+ * 使用静态内部类来维护单例，只有在第一次调用的时候，静态内部类才会初始化。
  * @Author: cc
  * @Date: 2019/11/22 14:00
  */
