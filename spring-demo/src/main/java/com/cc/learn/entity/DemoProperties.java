@@ -1,6 +1,5 @@
 package com.cc.learn.entity;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DemoProperties {
-    @Value("${random.uuid}")
     private String uuid;
 
     public String getUuid() {

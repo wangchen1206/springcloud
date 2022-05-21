@@ -21,7 +21,7 @@ public class CompletableFutureDemo {
         CompletableFuture<Void> task3 = CompletableFuture.runAsync(new Task(789, prices));
         CompletableFuture<Void> allTasks = CompletableFuture.allOf(task1, task2, task3);
         try {
-            allTasks.get(3, TimeUnit.SECONDS);
+            allTasks.get(10, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
         } catch (ExecutionException e) {
         } catch (TimeoutException e) {
